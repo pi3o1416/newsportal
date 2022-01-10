@@ -11,6 +11,9 @@
         <h1 class="is-size-2 has-text-primary">Admin Login</h1>
         <div class="box column is-4 is-offset-4" style="margin-top:12%">
             <form action="action.php" method="post">
+                <div class="is-size-6 has-text-danger">
+                    <?php include '../show_message.php'; ?>
+                </div>
                 <label class="label" for="Username">Username</label>
                 <input class="input" type="text" name="username" id="username" value=""><br>
                 <label class="label" for="Password">Password</label>

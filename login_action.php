@@ -17,33 +17,28 @@ if (!$db) {
             WHERE username = '$username'";
     $result = pg_query($db, $sql);
     $row = pg_fetch_row($result);
-    
+
     pg_close($db);
 
     $message = '';
     if ($row) {
         if (password_verify($password, $row[2])) {
-            $is_stuff = $row[6];
-            if ($is_stuff === 't') {
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['email'] = $email = $row[1];
-                $_SESSION['first_name'] = $first_name = $row[3];
-                $_SESSION['last_name'] = $last_name = $row[4];
-                $_SESSION['joined'] = $joined = $row[5];
-                $_SESSION['is_stuff'] = $is_stuff;
-                header('Location: http://localhost/newsportal/admin/dashboard.php');
-                die();
-            } else {
-                $message .= '?_message=Not+Authenticated';
-            }
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email = $row[1];
+            $_SESSION['first_name'] = $first_name = $row[3];
+            $_SESSION['last_name'] = $last_name = $row[4];
+            $_SESSION['joined'] = $joined = $row[5];
+            $_SESSION['is_stuff'] = $is_stuff;
+            header('Location: http://localhost/newsportal/');
+            die();
         } else {
             $message .= '?_message=Wrong+Username+or+Password';
         }
     } else {
         $message .= '?_message=Wrong+Username+or+Password';
     }
-    $newurl = 'Location: http://localhost/newsportal/admin/login.php' . $message;
+    $newurl = 'Location: http://localhost/newsportal/login.php' . $message;
     header($newurl);
     die();
 }
