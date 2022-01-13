@@ -291,6 +291,34 @@ function handle_news_edit(obj) {
 }
 
 
+function handle_news_delete(obj) {
+    var news_id = obj.id
+    $.ajax({
+        url: 'http://localhost/newsportal/admin/components/delete_news.php',
+        type: 'get',
+        data: {
+            news_id: news_id,
+        },
+        success: function (data) {
+            $.ajax({
+                url: 'http://localhost/newsportal/admin/components/news_list.php',
+                type: 'get',
+                data: {
+                    page: page,
+                    title: search_title,
+                    topic: search_topic,
+                },
+                success: function (data) {
+                    $('#content').html(data)
+                    document.getElementById('current')
+                    current.innerText = page + 1
+                }
+            })
+        }
+    })
+}
+
+
 function handle_news_edit_form(event) {
     event.preventDefault();
     var title = document.forms['news_edit_form']['title'].value

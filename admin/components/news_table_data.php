@@ -29,6 +29,8 @@ if (!$db) {
                 <td>' . $row[5] . '</td>
                 <td>' . $row[6] . '</td>
                 <td><button id="' . $row[0] . '"onclick="handle_news_edit(this)">Edit</button>
+                    <button id="' . $row[0] . '"onclick="handle_news_delete(this)">Delete</button>
+
             </tr>';
     }
     pg_close($db);

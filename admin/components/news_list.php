@@ -23,7 +23,7 @@
                 <th>Posted On</th>
                 <th>Posted By</th>
                 <th>Topic</th>
-                <th>Edit</th>
+                <th>Edit/Delete</th>
             </tr>
         </thead>
         <tbody id="table_body">
