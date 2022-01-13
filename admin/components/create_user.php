@@ -10,7 +10,7 @@
             echo
             '<div class="field">
                 <label class="label">' . $labels[$i] . '</label>
-                <input class="input" type="' . $type[$i] . '" name="' . $name[$i] . '" id="' . $name[$i] . '" value="">
+                <input class="input" type="' . $type[$i] . '" name="' . $name[$i] . '" id="' . $name[$i] . '" value="" onchange="'.'validate_' . $name[$i].'()">
                 </div>';
         }
         ?>

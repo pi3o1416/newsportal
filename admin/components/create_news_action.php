@@ -11,17 +11,16 @@ if (!$db) {
     echo "<h1>error : unable to open database</h1>";
     die('unable to connect database');
 } else {
-    $id = 'nextval(\'"news_id_seq"\'::regclass)';
-    $title = $_post['title'];
-    $date_published = $_post['date_published'];
-    $descriptions = $_post['descriptions'];
-    $topic = $_post['topic'];
+    $id = 'nextval(\'"News_id_seq"\'::regclass)';
+    $title = $_POST['title'];
+    $date_published = $_POST['date_published'];
+    $descriptions = $_POST['descriptions'];
+    $topic = $_POST['topic'];
     $image = 'http://localhost/newsportal/static/images/' . $title . $_post['image'];
-    $username = $_session['username'];
-
+    $username = $_SESSION['username'];
 
     $sql =
-        'insert into news values
+        'INSERT INTO news VALUES
             ('.$id.', \''.$title.'\', \''.$date_published.'\', \''.$descriptions.'\', \''.$image.'\', \''.$username.'\', \''.$topic.'\')';
     $result = pg_query($db, $sql);
     if ($result) {

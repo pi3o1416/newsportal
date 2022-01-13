@@ -51,30 +51,52 @@ create_user.onclick = () => {
 
             var button = document.getElementById('user_create_form_button');
             button.onclick = (event) => {
+                var message = document.getElementById('message');
                 event.preventDefault()
-                $.ajax({
-                    url: 'http://localhost/newsportal/admin/components/create_user_action.php',
-                    type: 'post',
-                    data: {
-                        username: document.forms['user_create_form']['username'].value,
-                        email: document.forms['user_create_form']['email'].value,
-                        first_name: document.forms['user_create_form']['first_name'].value,
-                        last_name: document.forms['user_create_form']['last_name'].value,
-                        password: document.forms['user_create_form']['password'].value,
-                        retype_password: document.forms['user_create_form']['retype_password'].value,
-                    },
-                    success: function (data) {
-                        var message = document.getElementById('message');
-                        message.innerHTML = data;
-                        if (data.match(/successful/i)) {
-                            message.className = 'has-text-success';
-                        } else {
-                            message.className = 'has-text-danger';
-                        }
-                        document.forms['user_create_form'].reset();
+                var username = document.forms['user_create_form']['username'].value
+                var email = document.forms['user_create_form']['email'].value
+                var first_name = document.forms['user_create_form']['first_name'].value
+                var last_name = document.forms['user_create_form']['last_name'].value
+                var password = document.forms['user_create_form']['password'].value
+                var retype_password = document.forms['user_create_form']['retype_password'].value
 
-                    }
-                })
+                if (!username) {
+                    message.innerHTML = '<h1>Username Cannot be empty</h1>'
+                    message.className = 'has-text-danger';
+                } else if (!email) {
+                    message.innerHTML = '<h1>Email Cannot be empty</h1>'
+                    message.className = 'has-text-danger';
+                } else if (!password || !retype_password) {
+                    message.innerHTML = '<h1>Password Cannot be empty</h1>'
+                    message.className = 'has-text-danger';
+                } else if (password !== retype_password) {
+                    message.innerHTML = '<h1>Password Did not match</h1>'
+                    message.className = 'has-text-danger';
+                } else {
+                    $.ajax({
+                        url: 'http://localhost/newsportal/admin/components/create_user_action.php',
+                        type: 'post',
+                        data: {
+                            username: document.forms['user_create_form']['username'].value,
+                            email: document.forms['user_create_form']['email'].value,
+                            first_name: document.forms['user_create_form']['first_name'].value,
+                            last_name: document.forms['user_create_form']['last_name'].value,
+                            password: document.forms['user_create_form']['password'].value,
+                            retype_password: document.forms['user_create_form']['retype_password'].value,
+                        },
+                        success: function (data) {
+                            message.innerHTML = data;
+                            if (data.match(/successful/i)) {
+                                message.className = 'has-text-success';
+                            } else {
+                                message.className = 'has-text-danger';
+                            }
+                            document.forms['user_create_form'].reset();
+
+                        }
+                    })
+                }
+
             }
         }
     })
@@ -91,28 +113,47 @@ create_news.onclick = () => {
             var button = document.getElementById('news_create_form_button');
             button.onclick = (event) => {
                 event.preventDefault()
-                $.ajax({
-                    url: 'http://localhost/newsportal/admin/components/create_news_action.php',
-                    type: 'post',
-                    data: {
-                        title: document.forms['news_create_form']['title'].value,
-                        descriptions: document.forms['news_create_form']['descriptions'].value,
-                        image: document.forms['news_create_form']['image'].value,
-                        date_published: document.forms['news_create_form']['date_published'].value,
-                        topic: document.forms['news_create_form']['topic'].value
-                    },
-                    success: function (data) {
-                        var message = document.getElementById('message');
-                        message.innerHTML = data;
-                       if (data.match(/successful/i)) {
-                            message.className = 'has-text-success';
-                        } else {
-                            message.className = 'has-text-danger';
-                        }
-                        document.forms['news_create_form'].reset();
+                var message = document.getElementById('message');
+                var title = document.forms['news_create_form']['title'].value
+                var descriptions = document.forms['news_create_form']['descriptions'].value
+                var image = document.forms['news_create_form']['image'].value
+                var date_published = document.forms['news_create_form']['date_published'].value
+                var topic = document.forms['news_create_form']['topic'].value
+                if (!title) {
+                    message.innerHTML = '<h1>Title Empty</h1>'
+                    message.className = 'has-text-danger'
+                } else if (!descriptions) {
+                    message.innerHTML = '<h1>Description Empty</h1>'
+                    message.className = 'has-text-danger'
+                } else if (!date_published) {
+                    message.innerHTML = '<h1>Date Empty</h1>'
+                    message.className = 'has-text-danger'
+                } else if (!topic) {
+                    message.innerHTML = '<h1>Topic Empty</h1>'
+                    message.className = 'has-text-danger'
+                } else {
+                    $.ajax({
+                        url: 'http://localhost/newsportal/admin/components/create_news_action.php',
+                        type: 'post',
+                        data: {
+                            title: title,
+                            descriptions: descriptions,
+                            image: image,
+                            date_published: date_published,
+                            topic: topic
+                        },
+                        success: function (data) {
+                            message.innerHTML = data;
+                            if (data.match(/successful/i)) {
+                                message.className = 'has-text-success';
+                            } else {
+                                message.className = 'has-text-danger';
+                            }
+                            document.forms['news_create_form'].reset();
 
-                    }
-                })
+                        }
+                    })
+                }
             }
         }
     })
@@ -279,4 +320,4 @@ function handle_news_edit_form(event) {
 
 
 
- 
+

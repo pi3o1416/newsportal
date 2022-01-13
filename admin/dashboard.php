@@ -6,6 +6,7 @@
     <?php include '../base.php'; ?>
     <title>Admin Dashboard</title>
     <script src="http://localhost/newsportal/static/js/admin.js" defer> </script>
+    <script src="http://localhost/newsportal/static/js/validation.js" defer> </script>
 
 
 </head>
